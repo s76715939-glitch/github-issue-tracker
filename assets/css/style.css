@@ -84,8 +84,90 @@ body {
   cursor: pointer;
   text-transform: capitalize;
 }
+.btn:hover {
+  background-color: #f0f0f0;
+}
 .btn-active {
   color: #fff;
   background-color: #4a00ff;
   border: 1px solid #4a00ff;
+}
+.btn-active:hover {
+  background-color: #4a00ff;
+}
+.tab-section {
+  width: 80%;
+  margin: 60px auto 16px auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 4px;
+  display: flex;
+  gap: 8px;
+  box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.08);
+}
+.counter-section {
+  width: 80%;
+  margin: 16px auto 0 auto;
+  padding: 24px;
+  background: #fff;
+  border: 4px;
+  box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* border-bottom: 2px solid #e4e4e7; */
+}
+.counter-section .left-side {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.counter-image {
+  width: 50px;
+  height: 50px;
+  background: #ece4ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.counter-details {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.counter-inner {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+.h-paragraph {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #64748b;
+}
+.right-side {
+  display: flex;
+  gap: 16px;
+}
+.indicator-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.indicator-open {
+  background: #00a96e;
+}
+.indicator-closed {
+  background: #a855f7;
+}
+.indicator-name {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #1f2937;
 }
