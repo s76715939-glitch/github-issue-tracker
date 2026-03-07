@@ -4,9 +4,63 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login | Github Issue Tracker</title>
+    <link
+      rel="shortcut icon"
+      href="./assets/github-logo.png"
+      type="image/x-icon"
+    />
     <link rel="stylesheet" href="./assets/css/login.css" />
   </head>
   <body>
+    <section class="login-container">
+      <div class="login-header">
+        <img src="./assets/github-logo.png" alt="" class="logo" />
+        <h2 class="login-heading">github issue tracker</h2>
+        <p class="login-paragraph">Sign in to manage your issues</p>
+      </div>
+      <div class="login-form">
+        <div class="input-field">
+          <label for="username" class="label">Username</label>
+          <br />
+          <input
+            type="text"
+            id="username"
+            class="input"
+            placeholder="Enter Username"
+          />
+        </div>
+        <div class="input-field">
+          <label for="password" class="label">Password</label>
+          <br />
+          <input
+            type="text"
+            id="password"
+            class="input"
+            placeholder="Enter Password"
+          />
+        </div>
+        <p class="error hide" id="error">Wrong Credentials</p>
+        <button class="login-submit" onclick="loginSubmit()">Sign In</button>
+      </div>
+      <div class="or">
+        <div class="line"></div>
+        <p>OR</p>
+        <div class="line"></div>
+      </div>
+      <div class="login-footer">
+        <p class="login-paragraph" style="text-align: center">
+          Demo Credentials
+        </p>
+        <div class="demo-credentials">
+          <p class="login-paragraph">
+            <span class="bold">Username</span>: admin
+          </p>
+          <p class="login-paragraph">
+            <span class="bold">Password</span>: admin123
+          </p>
+        </div>
+      </div>
+    </section>
     <script src="./assets/js/login.js"></script>
   </body>
 </html>
