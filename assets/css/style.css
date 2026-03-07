@@ -115,7 +115,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* border-bottom: 2px solid #e4e4e7; */
 }
 .counter-section .left-side {
   display: flex;
@@ -170,4 +169,12 @@ body {
   font-size: 1rem;
   font-weight: 500;
   color: #1f2937;
+}
+.main-section {
+  background: #fbfbfb;
+  width: 80%;
+  margin: 0 auto;
+  border-top: 3px solid #e4e4e7;
+  padding: 24px;
+  box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.08);
 }
