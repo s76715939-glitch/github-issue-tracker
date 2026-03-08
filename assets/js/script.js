@@ -36,7 +36,7 @@ const fetchSearchIssue = async (query) => {
 };
 const renderIssueCard = (data) => {
   return `
-    <div class="card ${data.status === "open" ? "card-open" : "card-close"}">
+    <div class="card ${data.status === "open" ? "card-open" : "card-close"}" onclick="openModal(${data.id})">
       <div class="card-header">
         <img src="./assets/${data.status === "open" ? "Open-Status.png" : "Closed-Status.png"}" alt="" width="24px" height="24px" />
         <div class="issue-level ${data.priority === "high" ? "high-issue" : data.priority === "medium" ? "medium-issue" : "low-issue"}">${data.priority}</div>
@@ -145,11 +145,21 @@ const displaySearchIssue = (array) => {
     cardContainer.innerHTML += renderIssueCard(data);
   });
 };
+const openModal = (id) => {
+  console.log(id);
+  const modalContainer = document.querySelector(".modal-container");
+  modalContainer.classList.remove("hide");
+
+}
+const closeModal = () => {
+  const modalContainer = document.querySelector(".modal-container");
+  modalContainer.classList.add("hide");
+}
 const getLabels = (labels) => {
   const issueLabels = labels
     .map(
       (e) =>
-        `<div class="label ${e === "bug" ? "label-bug" : e === "enhancement" ? "label-enhance" : "label-help"}">
+      `<div class="label ${e === "bug" ? "label-bug" : e === "enhancement" ? "label-enhance" : "label-help"}">
       <img src="./assets/${e === "bug" ? "BugDroid" : e === "enhancement" ? "Sparkle" : "Lifebuoy"}.png" />
         ${e}
       </div>`,
@@ -188,4 +198,5 @@ searchBtn.addEventListener("click", () => {
   }
   fetchSearchIssue(searchInput);
 });
+
 fetchAllIssue();
