@@ -329,57 +329,63 @@ body {
 .loader {
   width: 48px;
   height: 48px;
-  margin: 0 auto;
-  border-radius: 50%;
   display: block;
+  margin: 0 auto 30px auto;
   position: relative;
-  border: 3px solid;
-  border-color: #4a00ff #4a00ff transparent transparent;
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
-}
-.loader::after,
-.loader::before {
-  content: "";
-  box-sizing: border-box;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  border: 3px solid;
-  border-color: transparent transparent #4a00ff #4a00ff;
-  width: 40px;
-  height: 40px;
+  border-width: 3px 2px 3px 2px;
+  border-style: solid dotted solid dotted;
+  border-color: #4a00ff rgba(255, 255, 255, 0.3) #00a96e rgba(151, 107, 93, 0.3);
   border-radius: 50%;
   box-sizing: border-box;
-  animation: rotationBack 0.5s linear infinite;
-  transform-origin: center center;
+  animation: 1s rotate linear infinite;
 }
-.loader::before {
-  width: 32px;
-  height: 32px;
-  border-color: #4a00ff #4a00ff transparent transparent;
-  animation: rotation 1.5s linear infinite;
+.loader:before,
+.loader:after {
+  content: "";
+  top: 0;
+  left: 0;
+  position: absolute;
+  border: 10px solid transparent;
+  border-bottom-color: #00a96e;
+  transform: translate(-10px, 19px) rotate(-35deg);
 }
-
-@keyframes rotation {
-  0% {
-    transform: rotate(0deg);
-  }
+.loader:after {
+  border-color: #4a00ff #0000 #0000 #0000;
+  transform: translate(32px, 3px) rotate(-35deg);
+}
+@keyframes rotate {
   100% {
     transform: rotate(360deg);
   }
 }
-@keyframes rotationBack {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(-360deg);
-  }
-}
 .hide {
   display: none;
+}
+@media screen and (max-width: 800px) {
+  .header-section {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+@media screen and (max-width: 775px) {
+  .tab-section,
+  .counter-section,
+  .main-section {
+    width: 95%;
+  }
+}
+@media screen and (max-width: 680px) {
+  .counter-section {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .search-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .card {
+    width: 100%;
+  }
 }
