@@ -56,13 +56,23 @@ const renderIssueCard = (data) => {
     </div>
   `;
 };
+const noIssue = `
+    <div class="no-issue">
+      <h2>No Issue Found</h2>
+    </div>
+`;
 const displayIssues = (array) => {
   clearActiveTabs();
   activeTab("all");
-  const cardContainer = document.querySelector(".cards-container");
-  cardContainer.innerHTML = "";
   const innerCounter = document.querySelector("#counter");
   innerCounter.textContent = array.length;
+  const cardContainer = document.querySelector(".cards-container");
+  if (array.length === 0) {
+    cardContainer.innerHTML = noIssue;
+    return;
+  } else {
+    cardContainer.innerHTML = "";
+  }
   array.forEach((data) => {
     cardContainer.innerHTML += renderIssueCard(data);
   });
@@ -70,10 +80,15 @@ const displayIssues = (array) => {
 const displayOpenIssue = (array) => {
   clearActiveTabs();
   activeTab("open");
-  const cardContainer = document.querySelector(".cards-container");
-  cardContainer.innerHTML = "";
   const innerCounter = document.querySelector("#counter");
   innerCounter.textContent = array.length;
+  const cardContainer = document.querySelector(".cards-container");
+  if (array.length === 0) {
+    cardContainer.innerHTML = noIssue;
+    return;
+  } else {
+    cardContainer.innerHTML = "";
+  }
   array.forEach((data) => {
     cardContainer.innerHTML += renderIssueCard(data);
   });
@@ -81,10 +96,16 @@ const displayOpenIssue = (array) => {
 const displayClosedIssue = (array) => {
   clearActiveTabs();
   activeTab("closed");
-  const cardContainer = document.querySelector(".cards-container");
-  cardContainer.innerHTML = "";
   const innerCounter = document.querySelector("#counter");
   innerCounter.textContent = array.length;
+  const cardContainer = document.querySelector(".cards-container");
+  if (array.length === 0) {
+    cardContainer.innerHTML = noIssue;
+    return;
+  } else {
+    cardContainer.innerHTML = "";
+  }
+
   array.forEach((data) => {
     const html = `
         <div class="card ${data.status === "open" ? "card-open" : "card-close"}">
@@ -111,10 +132,15 @@ const displayClosedIssue = (array) => {
 };
 const displaySearchIssue = (array) => {
   clearActiveTabs();
-  const cardContainer = document.querySelector(".cards-container");
-  cardContainer.innerHTML = "";
   const innerCounter = document.querySelector("#counter");
   innerCounter.textContent = array.length;
+  const cardContainer = document.querySelector(".cards-container");
+  if (array.length === 0) {
+    cardContainer.innerHTML = noIssue;
+    return;
+  } else {
+    cardContainer.innerHTML = "";
+  }
   array.forEach((data) => {
     cardContainer.innerHTML += renderIssueCard(data);
   });
@@ -123,7 +149,10 @@ const getLabels = (labels) => {
   const issueLabels = labels
     .map(
       (e) =>
-        `<div class="label ${e === "bug" ? "label-bug" : e === "enhancement" ? "label-enhance" : "label-help"}">${e}</div>`,
+        `<div class="label ${e === "bug" ? "label-bug" : e === "enhancement" ? "label-enhance" : "label-help"}">
+      <img src="./assets/${e === "bug" ? "BugDroid" : e === "enhancement" ? "Sparkle" : "Lifebuoy"}.png" />
+        ${e}
+      </div>`,
     )
     .join("");
   return issueLabels;
@@ -154,6 +183,7 @@ const searchBtn = document.querySelector("#search-btn");
 searchBtn.addEventListener("click", () => {
   const searchInput = document.querySelector("#search-input").value;
   if (searchInput === "") {
+    fetchAllIssue();
     return;
   }
   fetchSearchIssue(searchInput);
