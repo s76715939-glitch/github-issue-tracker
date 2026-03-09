@@ -60,7 +60,7 @@ const renderIssueCard = (data) => {
       </div>
       <div class="line"></div>
       <div class="card-footer">
-        <p class="card-paragraph reporter">#1 by ${data.author}</p>
+        <p class="card-paragraph reporter">#${data.id} by ${data.author}</p>
         <p class="card-paragraph report-date">${new Date(data.createdAt).toLocaleDateString()}</p>
       </div>
     </div>
