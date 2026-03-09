@@ -172,7 +172,7 @@ const openModal = (data) => {
         </h3>
       </div>
       <div class="priority">
-        <p class="modal-description">Assignee:</p>
+        <p class="modal-description">Priority:</p>
         <div class="issue-level ${data.priority === "high" ? "modal-high-issue" : data.priority === "medium" ? "modal-medium-issue" : "modal-low-issue"}">
           ${data.priority}
         </div>
