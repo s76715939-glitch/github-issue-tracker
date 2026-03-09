@@ -222,7 +222,7 @@ body {
 }
 
 .card {
-  width: 300px;
+  width: 310px;
   background: #fff;
   box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.08);
   border-radius: 8px;
@@ -247,13 +247,12 @@ body {
 
 .issue-level {
   width: 80px;
-  height: 24px;
-  line-height: 24px;
   font-size: 0.75rem;
   font-weight: 500;
   text-transform: uppercase;
   border-radius: 9999px;
   text-align: center;
+  padding: 5px 0;
 }
 
 .high-issue {
@@ -295,9 +294,8 @@ body {
 .label {
   text-transform: uppercase;
   font-size: 0.7rem;
-  height: 24px;
   font-weight: 500;
-  padding: 0 8px;
+  padding: 3.5px 8px;
   border-radius: 999px;
   display: flex;
   align-items: center;
@@ -305,6 +303,7 @@ body {
 }
 
 .label img {
+  width: 15px;
   height: max-content;
   line-height: 100%;
 }
@@ -352,36 +351,35 @@ body {
 
 .modal-container {
   background: #fff;
-  width: 90%;
-  height: 414px;
-  max-width: 700px;
+  width: 100%;
+  height: max-content;
   position: fixed;
-  top: 50%;
-  bottom: 50%;
-  left: 50%;
-  right: 50%;
-  transform: translate(-50%, -50%);
+  bottom: 0;
+  left: 0;
+  right: 0;
   box-shadow: 0px 3px 6px 5px rgba(0, 0, 0, 0.08);
-  border-radius: 8px;
-  padding: 32px;
+  padding: 15px;
   opacity: 0;
+  margin-top: -15px;
   animation: fadeDrop 0.2s ease forwards;
 }
 
 @keyframes fadeDrop {
   from {
     opacity: 0;
+    margin-top: -15px;
   }
 
   to {
     opacity: 1;
+    margin-top: 0;
   }
 }
 
 .modal-heading {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #1F2937;
+  color: #1f2937;
   margin-bottom: 8px;
 }
 
@@ -389,19 +387,21 @@ body {
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
 }
 
 .label-open {
-  background: #00A96E;
+  background: #00a96e;
   color: #fff;
-  border: 1px solid #00A96E;
+  border: 1px solid #00a96e;
+  padding: 2.5px 10px;
 }
 
 .label-close {
   background: #4a00ff;
   color: #fff;
   border: 1px solid #4a00ff;
+  padding: 2.5px 10px;
 }
 
 .modal-description {
@@ -411,7 +411,7 @@ body {
 }
 
 .modal-high-issue {
-  background-color: #EF4444;
+  background-color: #ef4444;
   color: #fff;
 }
 
@@ -428,7 +428,7 @@ body {
 .modal-footer {
   display: flex;
   justify-content: space-between;
-  background: #F8FAFC;
+  background: #f8fafc;
   padding: 16px;
   border-radius: 8px;
   margin: 24px 0;
@@ -447,7 +447,7 @@ body {
   font-size: 1rem;
   text-transform: capitalize;
   font-weight: 600;
-  color: #1F2937;
+  color: #1f2937;
 }
 
 .loader {
@@ -498,7 +498,6 @@ body {
 }
 
 @media screen and (max-width: 775px) {
-
   .tab-section,
   .counter-section,
   .main-section {
@@ -512,7 +511,22 @@ body {
     gap: 10px;
   }
 }
-
+@media screen and (min-width: 580px) {
+  .modal-container {
+    width: 90%;
+    max-width: 700px;
+    top: 50%;
+    bottom: 50%;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 8px;
+    padding: 32px;
+  }
+  .card-paragraph {
+    font-size: 0.75rem !important;
+  }
+}
 @media screen and (max-width: 500px) {
   .search-container {
     flex-direction: column;

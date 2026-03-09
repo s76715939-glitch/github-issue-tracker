@@ -34,9 +34,19 @@ const fetchSearchIssue = async (query) => {
   displaySearchIssue(array);
   hideLoader();
 };
+const modalContainer = document.querySelector(".modal-container");
+const fetchModal = async (id) => {
+  modalContainer.innerHTML = `<div style="width: 100%; height: 100%; display: flex; align-items: center;"><span class="loader" id="modal-loader" style="margin: 0 auto"></span><div/>`;
+  modalContainer.classList.remove("hide");
+  const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  const object = data.data;
+  openModal(object);
+};
 const renderIssueCard = (data) => {
   return `
-    <div class="card ${data.status === "open" ? "card-open" : "card-close"}" onclick="openModal(${data.id})">
+    <div class="card ${data.status === "open" ? "card-open" : "card-close"}" onclick="fetchModal(${data.id})">
       <div class="card-header">
         <img src="./assets/${data.status === "open" ? "Open-Status.png" : "Closed-Status.png"}" alt="" width="24px" height="24px" />
         <div class="issue-level ${data.priority === "high" ? "high-issue" : data.priority === "medium" ? "medium-issue" : "low-issue"}">${data.priority}</div>
@@ -145,21 +155,44 @@ const displaySearchIssue = (array) => {
     cardContainer.innerHTML += renderIssueCard(data);
   });
 };
-const openModal = (id) => {
-  console.log(id);
-  const modalContainer = document.querySelector(".modal-container");
-  modalContainer.classList.remove("hide");
-
-}
+const openModal = (data) => {
+  const html = `
+    <h2 class="modal-heading">${data.title}</h2>
+    <div class="modal-opener">
+      <div class="label ${data.status === "open" ? "label-open" : "label-close"}" style="text-transform: capitalize;">${data.status === "open" ? "Opened" : "Closed"}</div>
+      <p class="card-paragraph" style="margin-bottom: 0; font-size: 0.9rem; display: flex; align-items: center; gap: 5px;"><span style="font-size: 1.5rem">&bull;</span>Opened by ${data.assignee}<span style="font-size: 1.5rem">&bull;</span>${new Date(data.updatedAt).toLocaleDateString()}</p>
+    </div>
+    <div class="issue-labels">${getLabels(data.labels)}</div>
+    <p class="modal-description">${data.description}</p>
+    <div class="modal-footer">
+      <div class="assignee">
+        <p class="modal-description">Assignee:</p>
+        <h3 class="assignee-name">
+          ${data.assignee}
+        </h3>
+      </div>
+      <div class="priority">
+        <p class="modal-description">Assignee:</p>
+        <div class="issue-level ${data.priority === "high" ? "modal-high-issue" : data.priority === "medium" ? "modal-medium-issue" : "modal-low-issue"}">
+          ${data.priority}
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-active" onclick="closeModal()" style="width: 76px; float: right;">
+      close
+    </button>
+    `;
+  modalContainer.innerHTML = html;
+};
 const closeModal = () => {
   const modalContainer = document.querySelector(".modal-container");
   modalContainer.classList.add("hide");
-}
+};
 const getLabels = (labels) => {
   const issueLabels = labels
     .map(
       (e) =>
-      `<div class="label ${e === "bug" ? "label-bug" : e === "enhancement" ? "label-enhance" : "label-help"}">
+        `<div class="label ${e === "bug" ? "label-bug" : e === "enhancement" ? "label-enhance" : "label-help"}">
       <img src="./assets/${e === "bug" ? "BugDroid" : e === "enhancement" ? "Sparkle" : "Lifebuoy"}.png" />
         ${e}
       </div>`,
@@ -178,13 +211,13 @@ const activeTab = (id) => {
   tab.classList.add("btn-active");
 };
 const showLoader = () => {
-  const loader = document.querySelector(".loader");
+  const loader = document.querySelector("#data-loader");
   const cardContainer = document.querySelector(".cards-container");
   cardContainer.classList.add("hide");
   loader.classList.remove("hide");
 };
 const hideLoader = () => {
-  const loader = document.querySelector(".loader");
+  const loader = document.querySelector("#data-loader");
   const cardContainer = document.querySelector(".cards-container");
   cardContainer.classList.remove("hide");
   loader.classList.add("hide");
