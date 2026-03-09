@@ -48,7 +48,7 @@ const renderIssueCard = (data) => {
   return `
     <div class="card ${data.status === "open" ? "card-open" : "card-close"}" onclick="fetchModal(${data.id})">
       <div class="card-header">
-        <img src="./assets/${data.status === "open" ? "Open-Status.png" : "Closed-Status.png"}" alt="" width="24px" height="24px" />
+        <img src="./assets/${data.status === "open" ? "Open-Status.png" : "Closed-Status.png"}" width="24px" height="24px" />
         <div class="issue-level ${data.priority === "high" ? "high-issue" : data.priority === "medium" ? "medium-issue" : "low-issue"}">${data.priority}</div>
       </div>
       <div class="card-body">
@@ -120,7 +120,7 @@ const displayClosedIssue = (array) => {
     const html = `
         <div class="card ${data.status === "open" ? "card-open" : "card-close"}">
         <div class="card-header">
-          <img src="./assets/${data.status === "open" ? "Open-Status.png" : "Closed-Status.png"}" alt="" width="24px" height="24px" />
+          <img src="./assets/${data.status === "open" ? "Open-Status.png" : "Closed-Status.png"}" width="24px" height="24px" />
           <div class="issue-level ${data.priority === "high" ? "high-issue" : data.priority === "medium" ? "medium-issue" : "low-issue"}">${data.priority}</div>
         </div>
         <div class="card-body">
