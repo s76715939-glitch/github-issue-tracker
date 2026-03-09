@@ -225,6 +225,7 @@ const searchBtn = document.querySelector("#search-btn");
 searchBtn.addEventListener("click", () => {
   const searchInput = document.querySelector("#search-input").value;
   if (searchInput === "") {
+    flag = 0;
     fetchAllIssue();
     return;
   }
