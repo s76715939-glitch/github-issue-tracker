@@ -1,4 +1,13 @@
+let flag = 0;
 const fetchAllIssue = async () => {
+  const tab = document.querySelector("#all");
+  if (flag === 1) {
+    if (tab.classList.contains("btn-active")) {
+      return
+    }
+  }
+  clearActiveTabs();
+  activeTab("all");
   showLoader();
   const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
   const res = await fetch(url);
@@ -6,8 +15,15 @@ const fetchAllIssue = async () => {
   const array = data.data;
   displayIssues(array);
   hideLoader();
+  flag = 1;
 };
 const fetchOpenIssue = async () => {
+  const tab = document.querySelector("#open");
+  if (tab.classList.contains("btn-active")) {
+    return
+  }
+  clearActiveTabs();
+  activeTab("open");
   showLoader();
   const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
   const res = await fetch(url);
@@ -17,6 +33,12 @@ const fetchOpenIssue = async () => {
   hideLoader();
 };
 const fetchClosedIssue = async () => {
+  const tab = document.querySelector("#closed");
+  if (tab.classList.contains("btn-active")) {
+    return
+  }
+  clearActiveTabs();
+  activeTab("closed");
   showLoader();
   const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
   const res = await fetch(url);
@@ -72,8 +94,6 @@ const noIssue = `
     </div>
 `;
 const displayIssues = (array) => {
-  clearActiveTabs();
-  activeTab("all");
   const innerCounter = document.querySelector("#counter");
   innerCounter.textContent = array.length;
   const cardContainer = document.querySelector(".cards-container");
@@ -88,8 +108,7 @@ const displayIssues = (array) => {
   });
 };
 const displayOpenIssue = (array) => {
-  clearActiveTabs();
-  activeTab("open");
+
   const innerCounter = document.querySelector("#counter");
   innerCounter.textContent = array.length;
   const cardContainer = document.querySelector(".cards-container");
@@ -104,8 +123,7 @@ const displayOpenIssue = (array) => {
   });
 };
 const displayClosedIssue = (array) => {
-  clearActiveTabs();
-  activeTab("closed");
+
   const innerCounter = document.querySelector("#counter");
   innerCounter.textContent = array.length;
   const cardContainer = document.querySelector(".cards-container");
@@ -117,27 +135,7 @@ const displayClosedIssue = (array) => {
   }
 
   array.forEach((data) => {
-    const html = `
-        <div class="card ${data.status === "open" ? "card-open" : "card-close"}">
-        <div class="card-header">
-          <img src="./assets/${data.status === "open" ? "Open-Status.png" : "Closed-Status.png"}" width="24px" height="24px" />
-          <div class="issue-level ${data.priority === "high" ? "high-issue" : data.priority === "medium" ? "medium-issue" : "low-issue"}">${data.priority}</div>
-        </div>
-        <div class="card-body">
-          <h3 class="card-heading">${data.title}</h3>
-          <p class="card-paragraph">${data.description}</p>
-          <div class="issue-labels">
-            ${getLabels(data.labels)}
-          </div>
-        </div>
-        <div class="line"></div>
-        <div class="card-footer">
-          <p class="card-paragraph reporter">#1 by ${data.author}</p>
-          <p class="card-paragraph report-date">${new Date(data.createdAt).toLocaleDateString()}</p>
-        </div>
-      </div>
-        `;
-    cardContainer.innerHTML += html;
+    cardContainer.innerHTML += renderIssueCard(data);
   });
 };
 const displaySearchIssue = (array) => {
@@ -192,7 +190,7 @@ const getLabels = (labels) => {
   const issueLabels = labels
     .map(
       (e) =>
-        `<div class="label ${e === "bug" ? "label-bug" : e === "enhancement" ? "label-enhance" : "label-help"}">
+      `<div class="label ${e === "bug" ? "label-bug" : e === "enhancement" ? "label-enhance" : "label-help"}">
       <img src="./assets/${e === "bug" ? "BugDroid" : e === "enhancement" ? "Sparkle" : "Lifebuoy"}.png" />
         ${e}
       </div>`,
@@ -209,6 +207,7 @@ const clearActiveTabs = () => {
 const activeTab = (id) => {
   const tab = document.querySelector(`#${id}`);
   tab.classList.add("btn-active");
+  return id;
 };
 const showLoader = () => {
   const loader = document.querySelector("#data-loader");
