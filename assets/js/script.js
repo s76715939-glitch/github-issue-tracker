@@ -160,7 +160,7 @@ const openModal = (data) => {
     <h2 class="modal-heading">${data.title}</h2>
     <div class="modal-opener">
       <div class="label ${data.status === "open" ? "label-open" : "label-close"}" style="text-transform: capitalize;">${data.status === "open" ? "Opened" : "Closed"}</div>
-      <p class="card-paragraph" style="margin-bottom: 0; font-size: 0.9rem; display: flex; align-items: center; gap: 5px;"><span style="font-size: 1.5rem">&bull;</span>Opened by ${data.assignee}<span style="font-size: 1.5rem">&bull;</span>${new Date(data.updatedAt).toLocaleDateString()}</p>
+      <p class="card-paragraph" style="margin-bottom: 0; font-size: 0.9rem; display: flex; align-items: center; gap: 5px;"><span style="font-size: 1.5rem">&bull;</span>Opened by ${data.author}<span style="font-size: 1.5rem">&bull;</span>${new Date(data.updatedAt).toLocaleDateString()}</p>
     </div>
     <div class="issue-labels">${getLabels(data.labels)}</div>
     <p class="modal-description">${data.description}</p>
